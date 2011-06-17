@@ -17,51 +17,40 @@
  * MineLib. If not, see <http://www.gnu.org/licenses/>.
  */
 
+package com.prealpha.minelib.nbt;
+
 import static org.junit.Assert.*;
 
-import java.io.ByteArrayInputStream;
-import java.io.DataInputStream;
-import java.io.File;
-import java.io.RandomAccessFile;
+import java.io.InputStream;
 import java.util.zip.GZIPInputStream;
-
-import com.google.common.io.ByteStreams;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.google.common.io.ByteStreams;
+
 public class GZipTest {
-	private RandomAccessFile file;
-	private DataInputStream dis;
+	private InputStream fileStream;
 
 	@Before
 	public void setUp() throws Exception {
-		//new random access file in read-only mode
-		file = new RandomAccessFile( new File("test.nbt"), "r");
+		// new random access file in read-only mode
+		fileStream = getClass().getResourceAsStream("test.nbt");
 	}
 
 	@After
 	public void tearDown() throws Exception {
-		if(file != null){
-			file.close();
-		}
-		if(dis != null){
-			dis.close();
+		if (fileStream != null) {
+			fileStream.close();
 		}
 	}
 
 	@Test
 	public void TestGzip() throws Exception {
-		byte[] data = new byte[(int) file.length()];
-		file.read(data);
-		dis = new DataInputStream(new GZIPInputStream(new ByteArrayInputStream(data)));
-
-		//reassign data to the decompressed version
-		data = ByteStreams.toByteArray(dis);
-
-		assertEquals(data[0],0x0a); //first byte is 10
-		assertEquals(data[1],0x00); //seccond byte is 0
-		assertEquals(data[2],0x0b); //third byte is 11
+		byte[] data = ByteStreams.toByteArray(new GZIPInputStream(fileStream));
+		assertEquals(data[0], 0x0a); // first byte is 10
+		assertEquals(data[1], 0x00); // seccond byte is 0
+		assertEquals(data[2], 0x0b); // third byte is 11
 	}
 }
