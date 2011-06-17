@@ -72,6 +72,6 @@ public abstract class Tag {
 
 	@Override
 	public String toString() {
-		return getValue().toString();
+		return getClass().getSimpleName() + ":" + getValue().toString();
 	}
 }
