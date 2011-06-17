@@ -43,17 +43,17 @@ public final class NbtDecoder implements Function<ByteBuffer, RootTag> {
 	private static Tag decodeSimple(Type tagType, ByteBuffer payload) {
 		switch (tagType) {
 		case BYTE:
-			return new NumericTag(payload.get());
+			return new ByteTag(payload.get());
 		case SHORT:
-			return new NumericTag(payload.getShort());
+			return new ShortTag(payload.getShort());
 		case INT:
-			return new NumericTag(payload.getInt());
+			return new IntTag(payload.getInt());
 		case LONG:
-			return new NumericTag(payload.getLong());
+			return new LongTag(payload.getLong());
 		case FLOAT:
-			return new NumericTag(payload.getFloat());
+			return new FloatTag(payload.getFloat());
 		case DOUBLE:
-			return new NumericTag(payload.getDouble());
+			return new DoubleTag(payload.getDouble());
 		case BYTE_ARRAY:
 			int arrayLength = payload.getInt();
 			byte[] arrayBytes = new byte[arrayLength];

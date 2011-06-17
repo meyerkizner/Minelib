@@ -19,10 +19,27 @@
 
 package com.prealpha.minelib.nbt;
 
-public abstract class NumericTag extends Tag {
-	NumericTag() {
+import java.nio.ByteBuffer;
+
+public final class ByteTag extends NumericTag {
+	private final byte value;
+
+	public ByteTag(byte value) {
+		this.value = value;
 	}
 
 	@Override
-	public abstract Number getValue();
+	public Type getTagType() {
+		return Type.BYTE;
+	}
+
+	@Override
+	public Byte getValue() {
+		return value;
+	}
+
+	@Override
+	public ByteBuffer toBytes() {
+		return ByteBuffer.wrap(new byte[] { value });
+	}
 }
