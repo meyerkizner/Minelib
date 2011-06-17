@@ -19,17 +19,8 @@
 
 package com.prealpha.minelib.world;
 
-import java.nio.ByteBuffer;
+public interface Region {
+	Chunk getChunk(int x, int z);
 
-public class Region {
-	public Region(ByteBuffer bb){
-		//work your magic
-	}
-	
-	public Chunk getChunk(int x, int z){
-		return //the chunk;
-	}
-	public boolean chunkExists(int x, int z){
-		return //chunk exists
-	}
+	boolean chunkExists(int x, int z);
 }

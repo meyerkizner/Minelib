@@ -19,8 +19,6 @@
 
 package com.prealpha.minelib.world;
 
-public class Chunk {
-	public byte getBlock(int x, int y, int z){
-		return //the block at that position
-	}
+public interface Chunk {
+	byte getBlock(int x, int y, int z);
 }

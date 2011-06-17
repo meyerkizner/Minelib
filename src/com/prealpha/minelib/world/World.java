@@ -19,18 +19,8 @@
 
 package com.prealpha.minelib.world;
 
-import java.io.File;
+public interface World {
+	Region getRegion(int x, int z);
 
-public class World {
-	public World(File worldDirectory){
-		//Load some stuff
-	}
-	
-	public Region getRegion(int x, int z){
-		return //the region at x,z
-	}
-	
-	public boolean regionExists(int x, int z){
-		return //region exists
-	}
+	boolean regionExists(int x, int z);
 }
