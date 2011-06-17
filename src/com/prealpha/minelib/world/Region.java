@@ -23,4 +23,10 @@ import java.util.Map;
 
 public interface Region extends Map<Coordinate2D, Chunk> {
 	Coordinate2D getPosition();
+	
+	public Chunk getChunk(int x, int z);
+	public boolean chunkExists(int x, int z);
+	
+	public Block getRegionalBlock(int x, int y, int z);
+	public boolean regionalBlockExists(int x, int z);
 }
