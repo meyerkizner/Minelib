@@ -1,6 +1,6 @@
 /*
  * MineLib, a Minecraft library
- * Copyright (C) 2011 Meyer Kizner
+ * Copyright (C) 2011 Ty Overby
  * 
  * This file is part of MineLib.
  * 
@@ -21,6 +21,7 @@ package com.prealpha.minelib.nbt;
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.util.zip.GZIPInputStream;
@@ -31,12 +32,13 @@ import org.junit.Test;
 
 import com.google.common.io.ByteStreams;
 
-public class LevelDataTest {
+public final class LevelDataTest {
 	private InputStream fileStream;
+	
 	private ByteBuffer decompressedByteBuffer;
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() throws IOException {
 		// new random access file in read-only mode
 		fileStream = getClass().getResourceAsStream("level.dat");
 		byte[] data = ByteStreams.toByteArray(new GZIPInputStream(fileStream));
@@ -44,14 +46,14 @@ public class LevelDataTest {
 	}
 
 	@After
-	public void tearDown() throws Exception {
+	public void tearDown() throws IOException {
 		if (fileStream != null) {
 			fileStream.close();
 		}
 	}
 
 	@Test
-	public void TestGzip() throws Exception {
+	public void testLevelData() {
 		NbtDecoder decoder = new NbtDecoder();
 		RootTag root = decoder.apply(decompressedByteBuffer);
 		//get the compound tag representing the player
