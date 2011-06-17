@@ -19,6 +19,17 @@
 
 package com.prealpha.minelib.world;
 
-public interface Chunk {
-	byte getBlock(int x, int y, int z);
+/*
+ * When this is implemented, it can probably be a class. Can't think of a
+ * reason to have multiple implementations.
+ */
+public interface Chunk extends Iterable<Byte> {
+	// relative to world
+	Coordinate2D getPosition();
+
+	byte getBlock(Coordinate3D coordinate);
+
+	byte getData(Coordinate3D coordinate);
+
+	// entities, etc...
 }

@@ -19,8 +19,8 @@
 
 package com.prealpha.minelib.world;
 
-public interface World {
-	Region getRegion(int x, int z);
+import java.util.Map;
 
-	boolean regionExists(int x, int z);
+public interface World extends Map<Coordinate2D, Chunk> {
+	// region access and metadata, however they will work
 }
