@@ -26,36 +26,32 @@ import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.util.zip.GZIPInputStream;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import com.google.common.io.ByteStreams;
 
 public final class LevelDataTest {
-	private InputStream fileStream;
+	private NbtDecoder decoder;
 	
-	private ByteBuffer decompressedByteBuffer;
-
-	@Before
-	public void setUp() throws IOException {
-		// new random access file in read-only mode
-		fileStream = getClass().getResourceAsStream("level.dat");
-		byte[] data = ByteStreams.toByteArray(new GZIPInputStream(fileStream));
-		decompressedByteBuffer = ByteBuffer.wrap(data);
+	private final ByteBuffer data;
+	
+	public LevelDataTest() throws IOException {
+		InputStream stream = getClass().getResourceAsStream("level.dat");
+		GZIPInputStream gis = new GZIPInputStream(stream);
+		data = ByteBuffer.wrap(ByteStreams.toByteArray(gis));
+		gis.close();
+		stream.close();
 	}
 
-	@After
-	public void tearDown() throws IOException {
-		if (fileStream != null) {
-			fileStream.close();
-		}
+	@Before
+	public void setUp() {
+		decoder = new NbtDecoder();
 	}
 
 	@Test
 	public void testLevelData() {
-		NbtDecoder decoder = new NbtDecoder();
-		RootTag root = decoder.apply(decompressedByteBuffer);
+		RootTag root = decoder.apply(data);
 		//get the compound tag representing the player
 		CompoundTag playerCompoundTag = (CompoundTag)((CompoundTag)root.getValue().getValue().get("Data")).getValue().get("Player");
 		//makes sure that it is 20 (the value in the file)

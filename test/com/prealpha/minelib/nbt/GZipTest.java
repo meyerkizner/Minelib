@@ -23,35 +23,28 @@ import static org.junit.Assert.*;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.ByteBuffer;
 import java.util.zip.GZIPInputStream;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 import com.google.common.io.ByteStreams;
 
 public final class GZipTest {
-	private InputStream fileStream;
+	private final ByteBuffer data;
 
-	@Before
-	public void setUp() throws IOException {
-		// new random access file in read-only mode
-		fileStream = getClass().getResourceAsStream("test.nbt");
-	}
-
-	@After
-	public void tearDown() throws IOException {
-		if (fileStream != null) {
-			fileStream.close();
-		}
+	public GZipTest() throws IOException {
+		InputStream stream = getClass().getResourceAsStream("test.nbt");
+		GZIPInputStream gis = new GZIPInputStream(stream);
+		data = ByteBuffer.wrap(ByteStreams.toByteArray(gis));
+		gis.close();
+		stream.close();
 	}
 
 	@Test
-	public void testGzip() throws IOException {
-		byte[] data = ByteStreams.toByteArray(new GZIPInputStream(fileStream));
-		assertEquals(data[0], 0x0a); // first byte is 10
-		assertEquals(data[1], 0x00); // second byte is 0
-		assertEquals(data[2], 0x0b); // third byte is 11
+	public void testGzip() {
+		assertEquals(0x0a, data.get(0));
+		assertEquals(0x00, data.get(1));
+		assertEquals(0x0b, data.get(2));
 	}
 }

@@ -21,8 +21,8 @@ package com.prealpha.minelib.nbt;
 
 import static org.junit.Assert.*;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.util.Map;
 import java.util.zip.GZIPInputStream;
@@ -34,40 +34,28 @@ import org.junit.Test;
 import com.google.common.io.ByteStreams;
 
 public final class NbtDecoderTestBasic {
-	/*
-	 * test.nbt compressed bytes
-	 */
-	private static final byte[] DATA = new byte[] { 0x1f, (byte) 0x8b, 0x08,
-			0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, (byte) 0xe3, 0x62,
-			(byte) 0xe0, (byte) 0xce, 0x48, (byte) 0xcd, (byte) 0xc9,
-			(byte) 0xc9, 0x57, 0x28, (byte) 0xcf, 0x2f, (byte) 0xca, 0x49,
-			(byte) 0xe1, 0x60, 0x60, (byte) 0xc9, 0x4b, (byte) 0xcc, 0x4d,
-			0x65, (byte) 0xe0, 0x74, 0x4a, (byte) 0xcc, 0x4b, (byte) 0xcc,
-			0x2b, 0x4a, (byte) 0xcc, 0x4d, 0x64, 0x00, 0x00, 0x77, (byte) 0xda,
-			0x5c, 0x3a, 0x21, 0x00, 0x00, 0x00 };
+	private NbtDecoder decoder;
 
-	private final NbtDecoder decoder;
+	private final ByteBuffer data;
 
-	private ByteBuffer data;
-
-	public NbtDecoderTestBasic() {
-		decoder = new NbtDecoder();
+	public NbtDecoderTestBasic() throws IOException {
+		InputStream stream = getClass().getResourceAsStream("test.nbt");
+		GZIPInputStream gis = new GZIPInputStream(stream);
+		data = ByteBuffer.wrap(ByteStreams.toByteArray(gis));
+		gis.close();
+		stream.close();
 	}
 
 	@Before
-	public void setUp() throws IOException {
-		ByteArrayInputStream bis = new ByteArrayInputStream(DATA);
-		GZIPInputStream gis = new GZIPInputStream(bis);
-		data = ByteBuffer.wrap(ByteStreams.toByteArray(gis));
-		gis.close();
-		bis.close();
+	public void setUp() {
+		decoder = new NbtDecoder();
 	}
-	
+
 	@After
 	public void tearDown() {
-		data = null;
+		decoder = null;
 	}
-	
+
 	@Test
 	public void testApply() {
 		RootTag root = decoder.apply(data);
