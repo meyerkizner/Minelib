@@ -29,11 +29,6 @@ public interface Chunk extends Iterable<Byte> {
 	Coordinate2D getRegionalPosition();
 	Coordinate2D getGlobalPosition();
 
-	byte getBlock(Coordinate3D coordinate);
-	byte getBlock(int x, int y, int z);
-
-	byte getData(Coordinate3D coordinate);
-	byte getData(int x, int y, int z);
-
-	// entities, etc...
+	Block getBlock(Coordinate3D coordinate);
+	Block getBlock(int x, int y, int z);
 }

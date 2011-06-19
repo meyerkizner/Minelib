@@ -25,4 +25,7 @@ public interface Block {
 	Coordinate2D getChunkwisePosition();
 	Coordinate2D getRegionalPosition();
 	Coordinate2D getGlobalPosition();
+	
+ 	public byte getType();
+	public byte getData();
 }
