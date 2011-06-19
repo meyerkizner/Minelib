@@ -94,4 +94,8 @@ public final class Coordinate3D {
 	public Coordinate3D minus(Coordinate3D other){
 		return minus(other.getX(),other.getY(),other.getZ());
 	}
+	
+	public Coordinate3D mod(int modulus){
+		return new Coordinate3D(this.getX()%modulus, this.getY()%modulus, this.getZ()%modulus);
+	}
 }

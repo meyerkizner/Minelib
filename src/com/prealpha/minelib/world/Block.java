@@ -19,13 +19,18 @@
 
 package com.prealpha.minelib.world;
 
-import com.prealpha.minelib.math.Coordinate2D;
+import com.prealpha.minelib.math.Coordinate3D;
 
 public interface Block {
-	Coordinate2D getChunkwisePosition();
-	Coordinate2D getRegionalPosition();
-	Coordinate2D getGlobalPosition();
+	Coordinate3D getChunkwisePosition();
+	Coordinate3D getRegionalPosition();
+	Coordinate3D getGlobalPosition();
 	
  	public byte getType();
 	public byte getData();
+	
+	public boolean equals(Block other);
+	public boolean isA(Block other);
+	public boolean sharesType(Block other);
+	public boolean sharesData(Block other);
 }

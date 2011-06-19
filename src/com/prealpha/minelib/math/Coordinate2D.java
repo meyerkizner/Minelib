@@ -85,4 +85,7 @@ public final class Coordinate2D {
 		return minus(other.getX(),other.getZ());
 	}
 	
+	public Coordinate2D mod(int modulus){
+		return new Coordinate2D(this.getX()%modulus, this.getZ()%modulus);
+	}
 }
