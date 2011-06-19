@@ -19,6 +19,10 @@
 
 package com.prealpha.minelib.world;
 
-public class Block {
-	
+import com.prealpha.minelib.math.Coordinate2D;
+
+public interface Block {
+	Coordinate2D getChunkwisePosition();
+	Coordinate2D getRegionalPosition();
+	Coordinate2D getGlobalPosition();
 }

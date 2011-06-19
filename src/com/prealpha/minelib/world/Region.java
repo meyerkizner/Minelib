@@ -20,13 +20,21 @@
 package com.prealpha.minelib.world;
 
 import java.util.Map;
+import com.prealpha.minelib.math.Coordinate2D;
 
 public interface Region extends Map<Coordinate2D, Chunk> {
-	Coordinate2D getPosition();
+	Coordinate2D getGlobalPosition();
 	
+	public Chunk getChunk(Coordinate2D location);
 	public Chunk getChunk(int x, int z);
+	
+	public boolean chunkExists(Coordinate2D location);
 	public boolean chunkExists(int x, int z);
 	
+	
+	public Block getRegionalBlock(Coordinate2D location);
 	public Block getRegionalBlock(int x, int y, int z);
+	
+	public boolean regionalBlockExists(Coordinate2D location);
 	public boolean regionalBlockExists(int x, int z);
 }

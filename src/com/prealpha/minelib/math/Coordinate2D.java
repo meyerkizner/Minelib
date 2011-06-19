@@ -17,27 +17,20 @@
  * Minelib. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.prealpha.minelib.world;
+package com.prealpha.minelib.math;
 
-public final class Coordinate3D {
+public final class Coordinate2D {
 	private final int x;
-
-	private final int y;
 
 	private final int z;
 
-	public Coordinate3D(int x, int y, int z) {
+	public Coordinate2D(int x, int z) {
 		this.x = x;
-		this.y = y;
 		this.z = z;
 	}
 
 	public int getX() {
 		return x;
-	}
-
-	public int getY() {
-		return y;
 	}
 
 	public int getZ() {
@@ -49,7 +42,6 @@ public final class Coordinate3D {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + x;
-		result = prime * result + y;
 		result = prime * result + z;
 		return result;
 	}
@@ -62,14 +54,11 @@ public final class Coordinate3D {
 		if (obj == null) {
 			return false;
 		}
-		if (!(obj instanceof Coordinate3D)) {
+		if (!(obj instanceof Coordinate2D)) {
 			return false;
 		}
-		Coordinate3D other = (Coordinate3D) obj;
+		Coordinate2D other = (Coordinate2D) obj;
 		if (x != other.x) {
-			return false;
-		}
-		if (y != other.y) {
 			return false;
 		}
 		if (z != other.z) {
@@ -80,6 +69,6 @@ public final class Coordinate3D {
 
 	@Override
 	public String toString() {
-		return "(" + x + ", " + y + ", " + z + ")";
+		return "(" + x + ", " + z + ")";
 	}
 }
