@@ -20,9 +20,8 @@
 package com.prealpha.minelib.math;
 
 public final class Coordinate2D {
-	private final int x;
-
-	private final int z;
+	public final int x;
+	public final int z;
 
 	public Coordinate2D(int x, int z) {
 		this.x = x;
@@ -71,4 +70,19 @@ public final class Coordinate2D {
 	public String toString() {
 		return "(" + x + ", " + z + ")";
 	}
+	
+	public Coordinate2D plus(int x, int z){
+		return new Coordinate2D(this.getX()+x, this.getZ()+z);
+	}
+	public Coordinate2D plus(Coordinate2D other){
+		return this.plus(other.getX(),other.getZ());
+	}
+	
+	public Coordinate2D minus(int x, int z){
+		return new Coordinate2D(this.getX()-x, this.getZ()-z);
+	}
+	public Coordinate2D minus(Coordinate2D other){
+		return minus(other.getX(),other.getZ());
+	}
+	
 }
