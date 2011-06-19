@@ -25,15 +25,15 @@ public class BasicBlock implements Block {
 	private final Coordinate3D globalPosition;
 	public final byte blockType;
 	public final byte data;
-	
-	
+
+
 	public BasicBlock(byte blockType){
-		this.globalPosition = new Coordinate3D(0,0,0);
+		this.globalPosition = null;
 		this.blockType=blockType;
 		this.data=0;
 	}
 	public BasicBlock(byte blockType, byte data){
-		this.globalPosition = new Coordinate3D(0, 0, 0);
+		this.globalPosition = null;
 		this.blockType=blockType;
 		this.data=data;
 	}
@@ -47,18 +47,33 @@ public class BasicBlock implements Block {
 		this.blockType = blockType;
 		this.data = data;
 	}
-	
+
 	@Override
 	public Coordinate3D getGlobalPosition() {
-		return this.globalPosition;
+		if(this.globalPosition!=null){
+			return this.globalPosition;
+		}
+		else{
+			return null;
+		}
 	}
 	@Override
 	public Coordinate3D getRegionalPosition() {
-		return this.globalPosition.mod(512);
+		if(this.globalPosition!=null){
+			return this.globalPosition.mod(512);
+		}
+		else{
+			return null;
+		}
 	}
 	@Override
 	public Coordinate3D getChunkwisePosition() {
-		return this.globalPosition.mod(16);
+		if(this.globalPosition!=null){
+			return this.globalPosition.mod(16);
+		}
+		else{
+			return null;
+		}
 	}
 
 
@@ -73,8 +88,13 @@ public class BasicBlock implements Block {
 
 	@Override
 	public boolean equals(Block other) {
-		if(!this.getGlobalPosition().equals(other.getGlobalPosition())){
-			return false;
+		if(this.getGlobalPosition()==null){
+			return other.getGlobalPosition()!=null;
+		}
+		else{
+			if(!this.getGlobalPosition().equals(other.getGlobalPosition())){
+				return false;
+			}
 		}
 		if(this.getType()!=other.getType()){
 			return false;
