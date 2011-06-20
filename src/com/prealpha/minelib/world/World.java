@@ -19,30 +19,31 @@
 
 package com.prealpha.minelib.world;
 
-import java.util.Map;
-
 import com.prealpha.minelib.math.Coordinate2D;
 import com.prealpha.minelib.math.Coordinate3D;
 
-public interface World extends Map<Coordinate2D, Chunk> {
-	// region access and metadata, however they will work
+public interface World {
 	Region getRegion(Coordinate2D location);
+
 	Region getRegion(int x, int z);
-	
+
 	boolean regionExists(Coordinate2D location);
+
 	boolean regionExists(int x, int z);
-	
-	
+
 	Chunk getGlobalChunk(Coordinate2D location);
+
 	Chunk getGlobalChunk(int x, int z);
-	
+
 	boolean globalChunkExists(Coordinate2D location);
+
 	boolean globalChunkExists(int x, int z);
-	
-	
+
 	Block getGlobalBlock(Coordinate3D location);
+
 	Block getGlobalBlock(int x, int y, int z);
-	
+
 	boolean globalBlockExists(Coordinate3D location);
+
 	boolean globalBlockExists(int x, int y, int z);
 }

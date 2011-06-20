@@ -21,13 +21,15 @@ package com.prealpha.minelib.world;
 
 public final class BlockType {
 	private final byte id;
+
 	private final byte data;
-	
-	public BlockType(byte id){
-		this.id=id;
-		this.data=0;
+
+	public BlockType(byte id) {
+		this.id = id;
+		this.data = 0;
 	}
-	public BlockType(byte id, byte data){
+
+	public BlockType(byte id, byte data) {
 		this.id = id;
 		this.data = data;
 	}

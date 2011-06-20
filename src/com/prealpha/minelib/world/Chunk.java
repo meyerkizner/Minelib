@@ -19,16 +19,19 @@
 
 package com.prealpha.minelib.world;
 
-import com.prealpha.minelib.math.*;
+import com.prealpha.minelib.math.Coordinate2D;
+import com.prealpha.minelib.math.Coordinate3D;
 
 /*
  * When this is implemented, it can probably be a class. Can't think of a
  * reason to have multiple implementations.
  */
-public interface Chunk extends Iterable<Byte> {
+public interface Chunk {
 	Coordinate2D getRegionalPosition();
+
 	Coordinate2D getGlobalPosition();
 
 	Block getBlock(Coordinate3D coordinate);
+
 	Block getBlock(int x, int y, int z);
 }
