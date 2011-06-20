@@ -1,6 +1,6 @@
 /*
  * MineLib, a Minecraft library
- * Copyright (C) 2011 Meyer Kizner
+ * Copyright (C) 2011 Ty Overby
  * 
  * This file is part of MineLib.
  * 
@@ -19,18 +19,42 @@
 
 package com.prealpha.minelib.world;
 
-import com.prealpha.minelib.math.Coordinate3D;
-
-public interface Block {
-	Coordinate3D getChunkwisePosition();
-	Coordinate3D getRegionalPosition();
-	Coordinate3D getGlobalPosition();
+public final class BlockType {
+	private final byte id;
+	private final byte data;
 	
-	public BlockType getBlockType();
+	public BlockType(byte id, byte data){
+		this.id = id;
+		this.data = data;
+	}
 	
-	public boolean equals(Block other);
-	public boolean isA(BlockType other);
-	public boolean isA(Block other);
-	public boolean isSimilar(BlockType other);
-	public boolean isSimilar(Block other);
+	public byte getID(){
+		return this.id;
+	}
+	public byte getData(){
+		return this.data;
+	}
+	
+	public boolean equals(BlockType other){
+		if(other == null){
+			return false;
+		}
+		if(this.getID()!=other.getID()){
+			return false;
+		}
+		if(this.getData()!=other.getData()){
+			return false;
+		}
+		return true;
+	}
+	
+	public boolean isSimilar(BlockType other){
+		if(other == null){
+			return false;
+		}
+		if(this.getID()!=other.getID()){
+			return false;
+		}
+		return true;
+	}
 }

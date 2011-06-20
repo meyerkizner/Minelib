@@ -1,6 +1,6 @@
 /*
  * MineLib, a Minecraft library
- * Copyright (C) 2011 Meyer Kizner
+ * Copyright (C) 2011 Ty Overby
  * 
  * This file is part of MineLib.
  * 
@@ -22,30 +22,32 @@ package com.prealpha.minelib.world;
 import com.prealpha.minelib.math.Coordinate3D;
 
 public class BasicBlock implements Block {
+	private final BlockType blockType;
 	private final Coordinate3D globalPosition;
-	public final byte blockType;
-	public final byte data;
 
-
-	public BasicBlock(byte blockType){
-		this.globalPosition = null;
+	public BasicBlock(BlockType blockType){
 		this.blockType=blockType;
-		this.data=0;
+		this.globalPosition=null;
 	}
-	public BasicBlock(byte blockType, byte data){
-		this.globalPosition = null;
-		this.blockType=blockType;
-		this.data=data;
-	}
-	public BasicBlock(Coordinate3D globalPosition,byte blockType, byte data){
-		this.globalPosition=globalPosition;
-		this.blockType=blockType;
-		this.data=data;
-	}
-	public BasicBlock(int globalX, int globalY, int globalZ, byte blockType, byte data){
-		this.globalPosition = new Coordinate3D(globalX, globalY, globalZ);
+	public BasicBlock(BlockType blockType, Coordinate3D position){
 		this.blockType = blockType;
-		this.data = data;
+		this.globalPosition = position;
+	}
+	public BasicBlock(byte blockID){
+		this.globalPosition = null;
+		this.blockType=new BlockType(blockID,(byte)0);
+	}
+	public BasicBlock(byte blockID, byte blockData){
+		this.globalPosition = null;
+		this.blockType=new BlockType(blockID,blockData);
+	}
+	public BasicBlock(Coordinate3D globalPosition,byte blockID, byte data){
+		this.globalPosition=globalPosition;
+		this.blockType=new BlockType(blockID,data);
+	}
+	public BasicBlock(int globalX, int globalY, int globalZ, byte blockID, byte data){
+		this.globalPosition = new Coordinate3D(globalX, globalY, globalZ);
+		this.blockType = new BlockType(blockID,data);
 	}
 
 	@Override
@@ -76,51 +78,42 @@ public class BasicBlock implements Block {
 		}
 	}
 
-
-	@Override
-	public byte getType() {
-		return this.blockType;
+	public byte getBlockID() {
+		return this.blockType.getID();
 	}
-	@Override
-	public byte getData() {
-		return this.data;
+	public byte getBlockData() {
+		return this.blockType.getData();
 	}
 
 	@Override
 	public boolean equals(Block other) {
-		if(this.getGlobalPosition()==null){
-			return other.getGlobalPosition()!=null;
-		}
-		else{
-			if(!this.getGlobalPosition().equals(other.getGlobalPosition())){
-				return false;
-			}
-		}
-		if(this.getType()!=other.getType()){
+		if(!this.getBlockType().equals(other)){
 			return false;
 		}
-		if(this.getData()!=other.getData()){
+		if(!this.getGlobalPosition().equals(other)){
 			return false;
 		}
 		return true;
+	}
+	
+	@Override
+	public BlockType getBlockType() {
+		return this.blockType;
+	}
+	@Override
+	public boolean isA(BlockType other) {
+		return this.getBlockType().equals(other);
 	}
 	@Override
 	public boolean isA(Block other) {
-		if(this.getType()!=other.getType()){
-			return false;
-		}
-		if(this.getData()!=other.getData()){
-			return false;
-		}
-		return true;
+		return this.getBlockType().equals(other.getBlockType());
 	}
 	@Override
-	public boolean sharesData(Block other) {
-		return this.getData()==other.getData();
+	public boolean isSimilar(BlockType other) {
+		return this.getBlockType().isSimilar(other);
 	}
 	@Override
-	public boolean sharesType(Block other) {
-		return this.getType()==other.getType();
+	public boolean isSimilar(Block other) {
+		return this.getBlockType().isSimilar(other.getBlockType());
 	}
-
 }
