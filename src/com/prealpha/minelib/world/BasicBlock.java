@@ -95,16 +95,6 @@ public final class BasicBlock implements Block {
 	}
 
 	@Override
-	public boolean isA(Block other) {
-		return this.getBlockType().equals(other.getBlockType());
-	}
-
-	@Override
-	public boolean isSimilar(BlockType other) {
-		return this.getBlockType().isSimilar(other);
-	}
-
-	@Override
 	public boolean isSimilar(Block other) {
 		return this.getBlockType().isSimilar(other.getBlockType());
 	}

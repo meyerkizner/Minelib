@@ -32,9 +32,5 @@ public interface Block {
 
 	boolean isA(BlockType other);
 
-	boolean isA(Block other);
-
-	boolean isSimilar(BlockType other);
-
 	boolean isSimilar(Block other);
 }
