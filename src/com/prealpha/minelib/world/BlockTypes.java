@@ -1,6 +1,6 @@
 /*
  * MineLib, a Minecraft library
- * Copyright (C) 2011 Meyer Kizner
+ * Copyright (C) 2011 Ty Overby
  * 
  * This file is part of MineLib.
  * 
