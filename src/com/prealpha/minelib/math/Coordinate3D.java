@@ -19,12 +19,18 @@
 
 package com.prealpha.minelib.math;
 
+import static com.google.common.base.Preconditions.*;
+
 public final class Coordinate3D {
-	public final int x;
-	public final int y;
-	public final int z;
+	private final int x;
+
+	private final int y;
+
+	private final int z;
 
 	public Coordinate3D(int x, int y, int z) {
+		checkArgument(y >= 0);
+		checkArgument(y < 128);
 		this.x = x;
 		this.y = y;
 		this.z = z;
@@ -40,6 +46,29 @@ public final class Coordinate3D {
 
 	public int getZ() {
 		return z;
+	}
+
+	public Coordinate3D plus(int x, int y, int z) {
+		return new Coordinate3D(this.getX() + x, this.getY() + y, this.getZ()
+				+ z);
+	}
+
+	public Coordinate3D plus(Coordinate3D other) {
+		return plus(other.getX(), other.getY(), other.getZ());
+	}
+
+	public Coordinate3D minus(int x, int y, int z) {
+		return new Coordinate3D(this.getX() - x, this.getY() - y, this.getZ()
+				- z);
+	}
+
+	public Coordinate3D minus(Coordinate3D other) {
+		return minus(other.getX(), other.getY(), other.getZ());
+	}
+
+	public Coordinate3D mod(int modulus) {
+		return new Coordinate3D(this.getX() % modulus, this.getY() % modulus,
+				this.getZ() % modulus);
 	}
 
 	@Override
@@ -79,23 +108,5 @@ public final class Coordinate3D {
 	@Override
 	public String toString() {
 		return "(" + x + ", " + y + ", " + z + ")";
-	}
-	
-	public Coordinate3D plus(int x, int y, int z){
-		return new Coordinate3D(this.getX()+x, this.getY()+y, this.getZ()+z);
-	}
-	public Coordinate3D plus(Coordinate3D other){
-		return plus(other.getX(),other.getY(),other.getZ());
-	}
-	
-	public Coordinate3D minus(int x, int y, int z){
-		return new Coordinate3D(this.getX()-x,this.getY()-y,this.getZ()-z);
-	}
-	public Coordinate3D minus(Coordinate3D other){
-		return minus(other.getX(),other.getY(),other.getZ());
-	}
-	
-	public Coordinate3D mod(int modulus){
-		return new Coordinate3D(this.getX()%modulus, this.getY()%modulus, this.getZ()%modulus);
 	}
 }
