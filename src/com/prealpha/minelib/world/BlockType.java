@@ -1,33 +1,35 @@
 /*
- * MineLib, a Minecraft library
+ * Minelib, a Minecraft library
  * Copyright (C) 2011 Ty Overby
  * 
- * This file is part of MineLib.
+ * This file is part of Minelib.
  * 
- * MineLib is free software: you can redistribute it and/or modify it under the
+ * Minelib is free software: you can redistribute it and/or modify it under the
  * terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
  * 
- * MineLib is distributed in the hope that it will be useful, but WITHOUT ANY
+ * Minelib is distributed in the hope that it will be useful, but WITHOUT ANY
  * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
  * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  * 
  * You should have received a copy of the GNU General Public License along with
- * MineLib. If not, see <http://www.gnu.org/licenses/>.
+ * Minelib. If not, see <http://www.gnu.org/licenses/>.
  */
 
 package com.prealpha.minelib.world;
 
 public final class BlockType {
 	private final byte id;
+
 	private final byte data;
-	
-	public BlockType(byte id){
-		this.id=id;
-		this.data=0;
+
+	public BlockType(byte id) {
+		this.id = id;
+		this.data = 0;
 	}
-	public BlockType(byte id, byte data){
+
+	public BlockType(byte id, byte data) {
 		this.id = id;
 		this.data = data;
 	}
