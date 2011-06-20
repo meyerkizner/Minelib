@@ -85,6 +85,31 @@ public final class BasicBlock implements Block {
 	}
 
 	@Override
+	public BlockType getBlockType() {
+		return this.blockType;
+	}
+
+	@Override
+	public boolean isA(BlockType other) {
+		return this.getBlockType().equals(other);
+	}
+
+	@Override
+	public boolean isA(Block other) {
+		return this.getBlockType().equals(other.getBlockType());
+	}
+
+	@Override
+	public boolean isSimilar(BlockType other) {
+		return this.getBlockType().isSimilar(other);
+	}
+
+	@Override
+	public boolean isSimilar(Block other) {
+		return this.getBlockType().isSimilar(other.getBlockType());
+	}
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -122,30 +147,5 @@ public final class BasicBlock implements Block {
 			return false;
 		}
 		return true;
-	}
-
-	@Override
-	public BlockType getBlockType() {
-		return this.blockType;
-	}
-
-	@Override
-	public boolean isA(BlockType other) {
-		return this.getBlockType().equals(other);
-	}
-
-	@Override
-	public boolean isA(Block other) {
-		return this.getBlockType().equals(other.getBlockType());
-	}
-
-	@Override
-	public boolean isSimilar(BlockType other) {
-		return this.getBlockType().isSimilar(other);
-	}
-
-	@Override
-	public boolean isSimilar(Block other) {
-		return this.getBlockType().isSimilar(other.getBlockType());
 	}
 }
