@@ -31,32 +31,50 @@ public final class BlockType {
 		this.id = id;
 		this.data = data;
 	}
-	
-	public byte getID(){
+
+	public byte getID() {
 		return this.id;
 	}
-	public byte getData(){
+
+	public byte getData() {
 		return this.data;
 	}
-	
-	public boolean equals(BlockType other){
-		if(other == null){
+
+	public boolean isSimilar(BlockType other) {
+		if (other == null) {
 			return false;
 		}
-		if(this.getID()!=other.getID()){
-			return false;
-		}
-		if(this.getData()!=other.getData()){
+		if (this.getID() != other.getID()) {
 			return false;
 		}
 		return true;
 	}
-	
-	public boolean isSimilar(BlockType other){
-		if(other == null){
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + data;
+		result = prime * result + id;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
 			return false;
 		}
-		if(this.getID()!=other.getID()){
+		if (!(obj instanceof BlockType)) {
+			return false;
+		}
+		BlockType other = (BlockType) obj;
+		if (data != other.data) {
+			return false;
+		}
+		if (id != other.id) {
 			return false;
 		}
 		return true;

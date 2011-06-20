@@ -25,16 +25,16 @@ import com.prealpha.minelib.math.Coordinate2D;
 public interface Region extends Map<Coordinate2D, Chunk> {
 	Coordinate2D getGlobalPosition();
 	
-	public Chunk getChunk(Coordinate2D location);
-	public Chunk getChunk(int x, int z);
+	Chunk getChunk(Coordinate2D location);
+	Chunk getChunk(int x, int z);
 	
-	public boolean chunkExists(Coordinate2D location);
-	public boolean chunkExists(int x, int z);
+	boolean chunkExists(Coordinate2D location);
+	boolean chunkExists(int x, int z);
 	
 	
-	public Block getRegionalBlock(Coordinate2D location);
-	public Block getRegionalBlock(int x, int y, int z);
+	Block getRegionalBlock(Coordinate2D location);
+	Block getRegionalBlock(int x, int y, int z);
 	
-	public boolean regionalBlockExists(Coordinate2D location);
-	public boolean regionalBlockExists(int x, int z);
+	boolean regionalBlockExists(Coordinate2D location);
+	boolean regionalBlockExists(int x, int z);
 }

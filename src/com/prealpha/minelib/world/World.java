@@ -26,23 +26,23 @@ import com.prealpha.minelib.math.Coordinate3D;
 
 public interface World extends Map<Coordinate2D, Chunk> {
 	// region access and metadata, however they will work
-	public Region getRegion(Coordinate2D location);
-	public Region getRegion(int x, int z);
+	Region getRegion(Coordinate2D location);
+	Region getRegion(int x, int z);
 	
-	public boolean regionExists(Coordinate2D location);
-	public boolean regionExists(int x, int z);
-	
-	
-	public Chunk getGlobalChunk(Coordinate2D location);
-	public Chunk getGlobalChunk(int x, int z);
-	
-	public boolean globalChunkExists(Coordinate2D location);
-	public boolean globalChunkExists(int x, int z);
+	boolean regionExists(Coordinate2D location);
+	boolean regionExists(int x, int z);
 	
 	
-	public Block getGlobalBlock(Coordinate3D location);
-	public Block getGlobalBlock(int x, int y, int z);
+	Chunk getGlobalChunk(Coordinate2D location);
+	Chunk getGlobalChunk(int x, int z);
 	
-	public boolean globalBlockExists(Coordinate3D location);
-	public boolean globalBlockExists(int x, int y, int z);
+	boolean globalChunkExists(Coordinate2D location);
+	boolean globalChunkExists(int x, int z);
+	
+	
+	Block getGlobalBlock(Coordinate3D location);
+	Block getGlobalBlock(int x, int y, int z);
+	
+	boolean globalBlockExists(Coordinate3D location);
+	boolean globalBlockExists(int x, int y, int z);
 }

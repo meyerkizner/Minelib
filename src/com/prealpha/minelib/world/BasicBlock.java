@@ -19,61 +19,59 @@
 
 package com.prealpha.minelib.world;
 
+import static com.google.common.base.Preconditions.*;
+
 import com.prealpha.minelib.math.Coordinate3D;
 
-public class BasicBlock implements Block {
+public final class BasicBlock implements Block {
 	private final BlockType blockType;
+
 	private final Coordinate3D globalPosition;
 
-	public BasicBlock(BlockType blockType){
-		this.blockType=blockType;
-		this.globalPosition=null;
+	public BasicBlock(byte blockID, byte data, int globalX, int globalY,
+			int globalZ) {
+		this(new BlockType(blockID, data), new Coordinate3D(globalX, globalY,
+				globalZ));
 	}
-	public BasicBlock(BlockType blockType, Coordinate3D position){
+
+	public BasicBlock(byte blockID, byte data, Coordinate3D position) {
+		this(new BlockType(blockID, data), position);
+	}
+
+	public BasicBlock(BlockType blockType, int globalX, int globalY, int globalZ) {
+		this(blockType, new Coordinate3D(globalX, globalY, globalZ));
+	}
+
+	public BasicBlock(BlockType blockType, Coordinate3D position) {
+		checkNotNull(blockType);
+		checkNotNull(position);
 		this.blockType = blockType;
 		this.globalPosition = position;
-	}
-	public BasicBlock(byte blockID){
-		this.globalPosition = null;
-		this.blockType=new BlockType(blockID,(byte)0);
-	}
-	public BasicBlock(byte blockID, byte blockData){
-		this.globalPosition = null;
-		this.blockType=new BlockType(blockID,blockData);
-	}
-	public BasicBlock(Coordinate3D globalPosition,byte blockID, byte data){
-		this.globalPosition=globalPosition;
-		this.blockType=new BlockType(blockID,data);
-	}
-	public BasicBlock(int globalX, int globalY, int globalZ, byte blockID, byte data){
-		this.globalPosition = new Coordinate3D(globalX, globalY, globalZ);
-		this.blockType = new BlockType(blockID,data);
 	}
 
 	@Override
 	public Coordinate3D getGlobalPosition() {
-		if(this.globalPosition!=null){
+		if (this.globalPosition != null) {
 			return this.globalPosition;
-		}
-		else{
+		} else {
 			return null;
 		}
 	}
+
 	@Override
 	public Coordinate3D getRegionalPosition() {
-		if(this.globalPosition!=null){
+		if (this.globalPosition != null) {
 			return this.globalPosition.mod(512);
-		}
-		else{
+		} else {
 			return null;
 		}
 	}
+
 	@Override
 	public Coordinate3D getChunkwisePosition() {
-		if(this.globalPosition!=null){
+		if (this.globalPosition != null) {
 			return this.globalPosition.mod(16);
-		}
-		else{
+		} else {
 			return null;
 		}
 	}
@@ -81,37 +79,71 @@ public class BasicBlock implements Block {
 	public byte getBlockID() {
 		return this.blockType.getID();
 	}
+
 	public byte getBlockData() {
 		return this.blockType.getData();
 	}
 
 	@Override
-	public boolean equals(Block other) {
-		if(!this.getBlockType().equals(other)){
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((blockType == null) ? 0 : blockType.hashCode());
+		result = prime * result
+				+ ((globalPosition == null) ? 0 : globalPosition.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
 			return false;
 		}
-		if(!this.getGlobalPosition().equals(other)){
+		if (!(obj instanceof BasicBlock)) {
+			return false;
+		}
+		BasicBlock other = (BasicBlock) obj;
+		if (blockType == null) {
+			if (other.blockType != null) {
+				return false;
+			}
+		} else if (!blockType.equals(other.blockType)) {
+			return false;
+		}
+		if (globalPosition == null) {
+			if (other.globalPosition != null) {
+				return false;
+			}
+		} else if (!globalPosition.equals(other.globalPosition)) {
 			return false;
 		}
 		return true;
 	}
-	
+
 	@Override
 	public BlockType getBlockType() {
 		return this.blockType;
 	}
+
 	@Override
 	public boolean isA(BlockType other) {
 		return this.getBlockType().equals(other);
 	}
+
 	@Override
 	public boolean isA(Block other) {
 		return this.getBlockType().equals(other.getBlockType());
 	}
+
 	@Override
 	public boolean isSimilar(BlockType other) {
 		return this.getBlockType().isSimilar(other);
 	}
+
 	@Override
 	public boolean isSimilar(Block other) {
 		return this.getBlockType().isSimilar(other.getBlockType());
