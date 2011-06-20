@@ -1,6 +1,6 @@
 /*
  * MineLib, a Minecraft library
- * Copyright (C) 2011 Ty Overby
+ * Copyright (C) 2011 Meyer Kizner
  * 
  * This file is part of MineLib.
  * 
@@ -19,46 +19,27 @@
 
 package com.prealpha.minelib.world;
 
-public final class BlockType {
-	private final byte id;
-	private final byte data;
-	
-	public BlockType(byte id){
-		this.id=id;
-		this.data=0;
-	}
-	public BlockType(byte id, byte data){
-		this.id = id;
-		this.data = data;
-	}
-	
-	public byte getID(){
-		return this.id;
-	}
-	public byte getData(){
-		return this.data;
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+public class BlockTypeTest {
+	@Test 
+	public void testEquals(){
+		BlockType wood = new BlockType((byte)17);
+		//check to see if wood is equal to itself
+		assertTrue(wood.equals(wood));
+		
+		BlockType whiteWool = new BlockType((byte)35,(byte)0);
+		BlockType orangeWool = new BlockType((byte)35,(byte)1);
+		//make sure that white wool is not the same as orange wool
+		assertFalse(whiteWool.equals(orangeWool));
 	}
 	
-	public boolean equals(BlockType other){
-		if(other == null){
-			return false;
-		}
-		if(this.getID()!=other.getID()){
-			return false;
-		}
-		if(this.getData()!=other.getData()){
-			return false;
-		}
-		return true;
-	}
-	
-	public boolean isSimilar(BlockType other){
-		if(other == null){
-			return false;
-		}
-		if(this.getID()!=other.getID()){
-			return false;
-		}
-		return true;
+	@Test
+	public void testSimilar(){
+		BlockType whiteWool = new BlockType((byte)35,(byte)0);
+		BlockType orangeWool = new BlockType((byte)35,(byte)1);
+		//make sure that they are similar
+		assertTrue(whiteWool.isSimilar(orangeWool));
 	}
 }
