@@ -27,7 +27,7 @@ public class BlockTypeTest {
 	public void testEquals(){
 		BlockType wood = new BlockType((byte)17);
 		//check to see if wood is equal to itself
-		assertTrue(wood.equals(wood));
+		assertEquals(wood,wood);
 		
 		BlockType whiteWool = new BlockType((byte)35,(byte)0);
 		BlockType orangeWool = new BlockType((byte)35,(byte)1);
