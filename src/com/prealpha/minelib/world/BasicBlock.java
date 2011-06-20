@@ -19,41 +19,34 @@
 
 package com.prealpha.minelib.world;
 
+import static com.google.common.base.Preconditions.*;
+
 import com.prealpha.minelib.math.Coordinate3D;
 
-public class BasicBlock implements Block {
+public final class BasicBlock implements Block {
 	private final BlockType blockType;
+
 	private final Coordinate3D globalPosition;
 
-	public BasicBlock(BlockType blockType) {
-		this.blockType = blockType;
-		this.globalPosition = null;
+	public BasicBlock(byte blockID, byte data, int globalX, int globalY,
+			int globalZ) {
+		this(new BlockType(blockID, data), new Coordinate3D(globalX, globalY,
+				globalZ));
+	}
+
+	public BasicBlock(byte blockID, byte data, Coordinate3D position) {
+		this(new BlockType(blockID, data), position);
+	}
+
+	public BasicBlock(BlockType blockType, int globalX, int globalY, int globalZ) {
+		this(blockType, new Coordinate3D(globalX, globalY, globalZ));
 	}
 
 	public BasicBlock(BlockType blockType, Coordinate3D position) {
+		checkNotNull(blockType);
+		checkNotNull(position);
 		this.blockType = blockType;
 		this.globalPosition = position;
-	}
-
-	public BasicBlock(byte blockID) {
-		this.globalPosition = null;
-		this.blockType = new BlockType(blockID, (byte) 0);
-	}
-
-	public BasicBlock(byte blockID, byte blockData) {
-		this.globalPosition = null;
-		this.blockType = new BlockType(blockID, blockData);
-	}
-
-	public BasicBlock(Coordinate3D globalPosition, byte blockID, byte data) {
-		this.globalPosition = globalPosition;
-		this.blockType = new BlockType(blockID, data);
-	}
-
-	public BasicBlock(int globalX, int globalY, int globalZ, byte blockID,
-			byte data) {
-		this.globalPosition = new Coordinate3D(globalX, globalY, globalZ);
-		this.blockType = new BlockType(blockID, data);
 	}
 
 	@Override
