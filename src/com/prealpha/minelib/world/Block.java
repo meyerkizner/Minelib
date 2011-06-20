@@ -28,13 +28,13 @@ public interface Block {
 
 	Coordinate3D getGlobalPosition();
 
-	public BlockType getBlockType();
+	BlockType getBlockType();
 
-	public boolean isA(BlockType other);
+	boolean isA(BlockType other);
 
-	public boolean isA(Block other);
+	boolean isA(Block other);
 
-	public boolean isSimilar(BlockType other);
+	boolean isSimilar(BlockType other);
 
-	public boolean isSimilar(Block other);
+	boolean isSimilar(Block other);
 }
