@@ -22,21 +22,41 @@ package com.prealpha.minelib.world;
 import com.prealpha.minelib.math.Coordinate2D;
 
 public interface Region {
+	/**
+	 * The global coordinates range from (-infinity,-infinity) to (+infinity,+infinity)
+	 * @return The location of the region with respect to the world.
+	 */
 	Coordinate2D getGlobalPosition();
 
+	/**
+	 * The values for the location range from (0,0,0) to (16,128,15). (x,y,z)
+	 * @param location
+	 * @return The chunk at the given location.
+	 */
 	Chunk getChunk(Coordinate2D location);
-
 	Chunk getChunk(int x, int z);
 
+	/**
+	 * The values for the location range from (0,0,0) to (16,128,15). (x,y,z)
+	 * @param location
+	 * @return if the chunk exists at the location
+	 */
 	boolean chunkExists(Coordinate2D location);
-
 	boolean chunkExists(int x, int z);
 
+	/**
+	 * The values for the location range from (0,0,0) to (512,128,512). (x,y,z)
+	 * @param location
+	 * @return A block at the given coordinates with respect to this region.
+	 */
 	Block getRegionalBlock(Coordinate2D location);
-
 	Block getRegionalBlock(int x, int y, int z);
 
+	/**
+	 * The values for the location range from (0,0,0) to (512,128,512). (x,y,z)
+	 * @param location
+	 * @return If the block at this location exists
+	 */
 	boolean regionalBlockExists(Coordinate2D location);
-
 	boolean regionalBlockExists(int x, int z);
 }

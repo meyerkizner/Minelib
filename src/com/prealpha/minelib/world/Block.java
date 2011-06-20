@@ -22,15 +22,51 @@ package com.prealpha.minelib.world;
 import com.prealpha.minelib.math.Coordinate3D;
 
 public interface Block {
+	/**
+	 * The value of the chunk-wise position ranges from (0,0,0) to (16,128,15). (x,y,z)
+	 * @return The position of the block relative to the chunk.
+	 */
 	Coordinate3D getChunkwisePosition();
 
+	/**
+	 * The value of the regional position ranges from (0,0,0) to (512,128,512). (x,y,z)
+	 * @return The position of the block relative to the region.
+	 */
 	Coordinate3D getRegionalPosition();
 
+	/**
+	 * The value of the global position ranges from (-infinity,0,-infinity) to (+infinity,128,+infinity). (x,y,z)
+	 * @return The position of the block relative to the world.
+	 */
 	Coordinate3D getGlobalPosition();
 
+	/**
+	 * @return A BlockType object that contains the block ID and block data
+	 */
 	BlockType getBlockType();
 
-	boolean isA(BlockType other);
+	/**
+	 * @param other
+	 * @return A boolean value that represents if the BlockType of each block is identical
+	 */
+	boolean isA(Block other);
+	/**
+	 * @param blockType A BlockType object to compair against the current Block
+	 * @return A boolean value that represents if the BlockType of the block is identical to the given Blocktype
+	 */
+	boolean isA(BlockType blockType);
 
+	/**
+	 * Blocks are similar to another block if their blocktype has matching IDs.
+	 * This means that orange wool IS similar to blue wool.
+	 * @param other Another Block object
+	 * @return A boolean value that states if the current block's is similar to another block's blocktype
+	 */
 	boolean isSimilar(Block other);
+	/**
+	 * A block can be similar to a blocktype if its blocktype has matching IDs to the given BlockType
+	 * @param blocktype The BlockType to compair it to.
+	 * @return A boolean value that states if the current block's blocktype is similar to another block
+	 */
+	boolean isSimilar(BlockType blocktype);
 }

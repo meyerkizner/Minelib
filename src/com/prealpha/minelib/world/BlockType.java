@@ -24,24 +24,42 @@ public final class BlockType {
 
 	private final byte data;
 
+	/**
+	 * Providing only the id, the data value will be set to 0
+	 * @param id The ID number for the block
+	 */
 	public BlockType(byte id) {
 		this.id = id;
 		this.data = 0;
 	}
-
+	/**
+	 * @param id The ID number for the block
+	 * @param data The extra data pertaining to the block
+	 */
 	public BlockType(byte id, byte data) {
 		this.id = id;
 		this.data = data;
 	}
-
+	
+	/**
+	 * @return The Identification number for the block
+	 */
 	public byte getID() {
 		return this.id;
 	}
-
+	/**
+	 * @return The Data pertaining to the block.  If there is no data, it will default to 0.
+	 */
 	public byte getData() {
 		return this.data;
 	}
 
+	/**
+	 * Similarity checks if the ID's are the same.  
+	 * This way, you could say that the different types of trees are similar.
+	 * @param other Another BlockType
+	 * @return
+	 */
 	public boolean isSimilar(BlockType other) {
 		if (other == null) {
 			return false;

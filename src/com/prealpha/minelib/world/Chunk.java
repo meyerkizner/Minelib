@@ -27,11 +27,22 @@ import com.prealpha.minelib.math.Coordinate3D;
  * reason to have multiple implementations.
  */
 public interface Chunk {
+	/**
+	 * The regional position ranges from (0,0) to (32,32). (x,z)
+	 * @return The position of the chunk relative to the region.
+	 */
 	Coordinate2D getRegionalPosition();
 
+	/**
+	 * The global position ranges from (-infinity,-infinity) to (+infinity,+infinity). (x,z)
+	 * @return The position of the chunk relative to the world.
+	 */
 	Coordinate2D getGlobalPosition();
 
+	/**
+	 * @param coordinate
+	 * @return The block at the given coordinate.  
+	 */
 	Block getBlock(Coordinate3D coordinate);
-
 	Block getBlock(int x, int y, int z);
 }

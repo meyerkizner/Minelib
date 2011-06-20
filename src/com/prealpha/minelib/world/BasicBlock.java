@@ -76,10 +76,15 @@ public final class BasicBlock implements Block {
 		}
 	}
 
+	/**
+	 * @return The ID in the blocktype
+	 */
 	public byte getBlockID() {
 		return this.blockType.getID();
 	}
-
+	/**
+	 * @return The data in the blocktype 
+	 */
 	public byte getBlockData() {
 		return this.blockType.getData();
 	}
@@ -90,13 +95,21 @@ public final class BasicBlock implements Block {
 	}
 
 	@Override
+	public boolean isA(Block other) {
+		return this.getBlockType().equals(other.getBlockType());
+	}
+	@Override
 	public boolean isA(BlockType other) {
 		return this.getBlockType().equals(other);
 	}
 
 	@Override
 	public boolean isSimilar(Block other) {
-		return this.getBlockType().isSimilar(other.getBlockType());
+		return isSimilar(other.getBlockType());
+	}
+	@Override
+	public boolean isSimilar(BlockType blocktype) {
+		return this.getBlockType().isSimilar(blocktype);
 	}
 
 	@Override
