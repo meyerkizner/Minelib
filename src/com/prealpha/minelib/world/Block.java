@@ -23,14 +23,18 @@ import com.prealpha.minelib.math.Coordinate3D;
 
 public interface Block {
 	Coordinate3D getChunkwisePosition();
+
 	Coordinate3D getRegionalPosition();
+
 	Coordinate3D getGlobalPosition();
-	
+
 	public BlockType getBlockType();
-	
-	public boolean equals(Block other);
+
 	public boolean isA(BlockType other);
+
 	public boolean isA(Block other);
+
 	public boolean isSimilar(BlockType other);
+
 	public boolean isSimilar(Block other);
 }
